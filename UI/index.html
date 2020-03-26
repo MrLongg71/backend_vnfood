@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>VNShop Manager</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+      </head>
+
+<body>
+
+    <div class="container-fluid" style="height: 100%">
+
+
+
+  <div class="row">
+    <div class="col-lg-3 h-100 " style="background: #0573ff; height: 500px;">
+        <h3 class="text-lg-center mt-2" style="color: white;">Bảng điều khiển</p>
+        <div class="dropdown dropdown dropright">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                <i class="fas fa-bars"></i>
+             Sản phẩm
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="add_product.html">Thêm sản phẩm</a>
+              <a class="dropdown-item" href="#">Cập nhật sản phẩm</a>
+              <a class="dropdown-item" href="#">Xoá sản phẩm</a>
+            </div>
+          </div>
+        </br>
+          <div class="dropdown dropdown dropright">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  <i class="fas fa-bars"></i>
+              Thống kê
+              </button>
+              <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Ngày</a>
+                  <a class="dropdown-item" href="#">Tuần</a>
+
+                <a class="dropdown-item" href="#">Tháng</a>
+                <a class="dropdown-item" href="#">Loại Sản phẩm bán nhiều</a>
+              </div>
+            </div>
+          </br>
+
+          <div class="dropdown dropdown dropright mt-10">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  <i class="fas fa-bars"></i>
+               Cài đặt
+                </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Đổi mật khẩu</a>
+                <a class="dropdown-item" href="edit_profile.html">Cập nhật thông tin</a>
+              </div>
+            </div>
+    </div>
+    <div class="col-lg-9">
+
+
+
+
+            <div class="d-flex">
+
+              <form class="form-inline my-2 my-lg-0 p-2 mr-auto">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+              <div class="p-2 ">
+                <img class="rounded-circle" src="../images/avatar.png" alt="" height="42" width="42">
+              </div>
+              <div class="p-2">
+                  <p class="text-lg-center mt-2">Admin</p>
+                </div>
+            </div>
+          <div class="row mt-2">
+              <div class=" col-lg-3 card-body fa-border bg-success text-white rounded text-lg-center mr-4 ml-5" style="width:400px">
+                  <div class="card-body">
+                    <h4 class="card-title">Tuần</h4>
+                    <p class="card-text">200.000đ</p>
+
+                  </div>
+                </div>
+                <div class=" col-lg-3 card-body fa-border bg-warning text-white rounded text-lg-center mr-3" style="width:400px">
+                    <div class="card-body">
+                      <h4 class="card-title">Tháng</h4>
+                      <p class="card-text">600.000đ</p>
+
+                    </div>
+                  </div>
+                  <div class=" col-lg-3 card-body fa-border bg-success text-white rounded text-lg-center" style="width:400px">
+                      <div class="card-body">
+                        <h4 class="card-title">Năm</h4>
+                        <p class="card-text">1000.000đ</p>
+
+                      </div>
+                    </div>
+          </div>
+          <ul class="list-group mt-2" style="list-style-type: none;">
+            <li class="list-group-item active">Danh sách sản phẩm</li>
+            <div class="list-group-item d-flex">
+
+              <li class=" mr-auto">Sản phẩm 1 </li>
+
+
+              <span class="mr-2 p-2 badge badge-primary">Thêm</span>
+              <span class=" mr-2 p-2 badge badge-info">Cập nhật</span>
+
+              <span class="p-2 badge badge-danger">Xoá</span>
+            </div>
+            <div class="list-group-item d-flex">
+
+              <li class=" mr-auto">Sản phẩm 1 </li>
+              <span class="mr-2 p-2 badge badge-primary">Thêm</span>
+              <span class=" mr-2 p-2 badge badge-info">Cập nhật</span>
+
+              <span class="p-2 badge badge-danger">Xoá</span>
+            </div>
+            <div class="list-group-item d-flex">
+
+              <li class=" mr-auto">Sản phẩm 1 </li>
+              <span class="mr-2 p-2 badge badge-primary">Thêm</span>
+              <span class=" mr-2 p-2 badge badge-info">Cập nhật</span>
+
+              <span class="p-2 badge badge-danger">Xoá</span>
+            </div>
+            <div class="list-group-item d-flex">
+
+              <li class=" mr-auto">Sản phẩm 1 </li>
+              <span class="mr-2 p-2 badge badge-primary">Thêm</span>
+              <span class=" mr-2 p-2 badge badge-info">Cập nhật</span>
+
+              <span class="p-2 badge badge-danger">Xoá</span>
+            </div>
+            <div class="list-group-item d-flex">
+
+              <li class=" mr-auto">Sản phẩm 1 </li>
+              <span class="mr-2 p-2 badge badge-primary">Thêm</span>
+              <span class=" mr-2 p-2 badge badge-info">Cập nhật</span>
+
+              <span class="p-2 badge badge-danger">Xoá</span>
+            </div>
+            <div class="list-group-item d-flex">
+
+              <li class=" mr-auto">Sản phẩm 1 </li>
+              <span class="mr-2 p-2 badge badge-primary">Thêm</span>
+              <span class=" mr-2 p-2 badge badge-info">Cập nhật</span>
+
+              <span class="p-2 badge badge-danger">Xoá</span>
+            </div>
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+              </ul>
+          </ul>
+          <ul class="list-group mt-2" style="list-style-type: none;">
+              <li class="list-group-item active">Danh sách Loại sản phẩm</li>
+              <div class="list-group-item d-flex">
+                <li class=" mr-auto">Loại Sản phẩm 1 </li>
+                <span class="mr-2 p-2 badge badge-primary">Thêm</span>
+                <span class=" mr-2 p-2 badge badge-info">Cập nhật</span>
+
+                <span class="p-2 badge badge-danger">Xoá</span>
+              </div>
+              <div class="list-group-item d-flex">
+
+                <li class=" mr-auto"> Loại Sản phẩm 1 </li>
+                <span class="mr-2 p-2 badge badge-primary">Thêm</span>
+                <span class=" mr-2 p-2 badge badge-info">Cập nhật</span>
+
+                <span class="p-2 badge badge-danger">Xoá</span>
+              </div>
+              <div class="list-group-item d-flex">
+
+                <li class=" mr-auto">Loại Sản phẩm 1 </li>
+                <span class="mr-2 p-2 badge badge-primary">Thêm</span>
+                <span class=" mr-2 p-2 badge badge-info">Cập nhật</span>
+
+                <span class="p-2 badge badge-danger">Xoá</span>
+              </div>
+              <div class="list-group-item d-flex">
+
+                <li class=" mr-auto">Loại Sản phẩm 1 </li>
+                <span class="mr-2 p-2 badge badge-primary">Thêm</span>
+                <span class=" mr-2 p-2 badge badge-info">Cập nhật</span>
+
+                <span class="p-2 badge badge-danger">Xoá</span>
+              </div>
+              <div class="list-group-item d-flex">
+
+                <li class=" mr-auto">Loại Sản phẩm 1 </li>
+                <span class="mr-2 p-2 badge badge-primary">Thêm</span>
+                <span class=" mr-2 p-2 badge badge-info">Cập nhật</span>
+
+                <span class="p-2 badge badge-danger">Xoá</span>
+              </div>
+              <div class="list-group-item d-flex">
+
+                <li class=" mr-auto">Loại Sản phẩm 1 </li>
+                <span class="mr-2 p-2 badge badge-primary">Thêm</span>
+                <span class=" mr-2 p-2 badge badge-info">Cập nhật</span>
+
+                <span class="p-2 badge badge-danger">Xoá</span>
+              </div>
+              <ul class="mt-2 pagination">
+                  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </ul>
+    </div>
+  </div>
+
+    </div>
+</body>
+
+</html>

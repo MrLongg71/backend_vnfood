@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>VNShop Manager</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+      </head>
+
+<body>
+
+    <div class="container-fluid" style="height: 100%">
+
+
+
+  <div class="row">
+    <div class="col-lg-3 h-100 " style="background: #0573ff; height: 500px;">
+        <h3 class="text-lg-center mt-2" style="color: white;">Bảng điều khiển</p>
+        <div class="dropdown dropdown dropright">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                <i class="fas fa-bars"></i>
+             Sản phẩm
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Thêm sản phẩm</a>
+              <a class="dropdown-item" href="#">Cập nhật sản phẩm</a>
+              <a class="dropdown-item" href="#">Xoá sản phẩm</a>
+            </div>
+          </div>
+        </br>
+          <div class="dropdown dropdown dropright">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  <i class="fas fa-bars"></i>
+              Thống kê
+              </button>
+              <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Ngày</a>
+                  <a class="dropdown-item" href="#">Tuần</a>
+
+                <a class="dropdown-item" href="#">Tháng</a>
+                <a class="dropdown-item" href="#">Loại Sản phẩm bán nhiều</a>
+              </div>
+            </div>
+          </br>
+
+          <div class="dropdown dropdown dropright mt-10">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  <i class="fas fa-bars"></i>
+               Cài đặt
+                </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Đổi mật khẩu</a>
+                <a class="dropdown-item" href="#">Cập nhật thông tin</a>
+              </div>
+            </div>
+    </div>
+    <div class="col-lg-9">
+
+
+
+
+            <div class="d-flex">
+
+              <form class="form-inline my-2 my-lg-0 p-2 mr-auto">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+              <div class="p-2 ">
+                <img class="rounded-circle" src="../images/avatar.png" alt="" height="42" width="42">
+              </div>
+              <div class="p-2">
+                  <p class="text-lg-center mt-2">Admin</p>
+                </div>
+            </div>
+          <div class="row m-2 border border-primary">
+              <div class="col-lg-8 p-2">
+                    <form action="/action_page.php" class="was-validated">
+                        <h4>Cập nhật thông tin</h4>
+                        <div class="form-group">
+                          <label>Tên:</label>
+                          <input type="text" value="Admin" class="form-control" placeholder="Nhập tên"  required="">
+                          <div class="valid-feedback">Ok</div>
+                          <div class="invalid-feedback">Nhập lại</div>
+                        </div>
+                        <div class="form-group">
+                          <label>Số diện thoại:</label>
+                          <input type="phone" class="form-control" placeholder="Nhập Số diện thoại"  required>
+                          <div class="valid-feedback">Ok.</div>
+                          <div class="invalid-feedback">Nhập lại</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                      </form>
+              </div>
+              <div class="p-2 col-lg-4">
+                    <div class="card">
+                            <img class="card-img-top" src="../images/avatar.png" alt="Card image">
+                            <div class="card-body">
+                              <h4 class="card-title">Admin</h4>
+                              <p class="card-text">Mô tả đây là quản ly.</p>
+                            </div>
+                          </div>
+                </div>
+          </div>
+
+    </div>
+  </div>
+
+    </div>
+</body>
+
+</html>
