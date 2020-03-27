@@ -12,6 +12,7 @@ exports.register = function(req, res, next){
             bcrypt.hash(req.body.password, 10, function(err, hash){
                 if (err) {return next(err);}
                 const user = new User();
+                console.log("register user" + req.body.email);
 
                 user.userId = uuid.v1();
                 user.email = req.body.email;
