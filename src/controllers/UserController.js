@@ -1,36 +1,131 @@
-const User = require('../model/UserModel');
-const bcrypt = require('bcrypt');
-const uuid = require('uuid');
+var userService = require('../services/user');
 
-exports.register = function(req, res, next){
+/**
+ * Function to create the user in user collection.
+ */
+exports.create = function (req, res, next) {
+    var body = new User(req.body);
+    if (!body.username) {
+        res.status(400).send('User name is missing');
+        return;
+    }
+    userService.createUser(body, function (error, response) {
+        if (response) {
+            res.status(201).send(response);
+        } else if (error) {
+            res.status(400).send(error);
+        }
+    });
+}
 
-    console.log("register user");
-    // User.findOne({email: req.body.email}, (err, user) => {
-        console.log("register user");
-        // if(user == null){
+/**
+ * Function to find user from user collection.
+ */
+exports.find = function (req, res) {
+    var params = req.params || {};
+    var query = {
+        username: params.username
+    };
+    if (!query) {
+        res.status(400).send('Bad Request');
+        return;
+    }
+    userService.findUser(query, function (error, response) {
+        if (error) {
+            res.status(404).send(error);
+            return;
+        }
+        if (response) {
+            res.status(200).send(response);
+            return;
+        }
+        if (!response) {
+            res.status(204).send('No Data Found');
+        }
+    });
+}
 
-            bcrypt.hash(req.body.password, 10, function(err, hash){
-                if (err) {return next(err);}
-                const user = new User();
-                console.log("register user" + req.body.email);
+/**
+ * Function to update the user data  by their ID.
+ */
+exports.updateById = function (req, res) {
+    var body = req.body;
 
-                user.userId = uuid.v1();
-                user.email = req.body.email;
-                user.name = req.body.name;
-                user.phone = req.body.phone;
-                user.address = req.body.address;
-                user.created_at = Date.now();
-                user.update_at = Date.now();
+    if (!body.id) {
+        res.status(400).send('Id is missing');
+        return;
+    }
+    var updateData = body.data || {}
+    userService.updateUserById(body.id, updateData, (err, response) => {
+        if (response) {
+            res.status(200).send(response);
+        } else if (err) {
+            res.status(400).send(err);
+        }
+    });
+}
 
-                user.role = 'user';
-                user.password = hash;
-                user.save((err, result) => {
-                    if(err) {return res.json({err})}
-                    res.json({user: result})
-                })
-            })
-        // }else{
-        //     res.json({err: 'Email has been used'})
-        // }
-    // })
+/**
+ * Function to uodate the user data by filter condition.
+ */
+exports.update = function (req, res) {
+    var body = req.body;
+    var query = body.query;
+    var data = body.data;
+    var options = body.options
+    if (!query) {
+        res.status(400).send('Bad request');
+        return;
+    }
+
+    userService.updateUser(query, data, options, (err, response) => {
+        if (response) {
+            res.status(200).send(response);
+        } else if (err) {
+            res.status(400).send(err);
+        }
+    });
+}
+
+/**
+ * Function to delete the user from collection.
+ */
+exports.delete = function (req, res) {
+    var body = req.body || {};
+    var query = body.query;
+    if (!query) {
+        res.status(400).send('Bad Request');
+        return;
+    }
+    userService.deleteUser(query, function (error, response) {
+        if (error) {
+            res.status(400).send(error);
+            return;
+        }
+        if (response) {
+            if (response.n === 1 && response.ok === 1) {
+                res.status(202).send(body);
+            }
+            if (response.n === 0 && response.ok === 1) {
+                res.status(204).send({
+                    message: 'No data found'
+                });
+            }
+        }
+    });
+}
+//TODO: 
+// Model.find()
+// Model.findById()
+
+class User {
+    constructor(userData) {
+        this.username = userData.username || '';
+        this.firstName = userData.firstName || '';
+        this.lastName = userData.lastName || '';
+        this.dob = userData.dob || '';
+        this.address = userData.address || '';
+        this.phone = userData.phone || '';
+        this.role = userData.role || '';
+    }
 }
