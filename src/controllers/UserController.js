@@ -1,131 +1,79 @@
-var userService = require('../services/user');
+const User = require('../model/UserModel');
+const userService = require('../services/user');
+const bcrypt = require('bcrypt');
+const uuid = require('uuid');
+const jwt = require('../helpers/jwt');
 
-/**
- * Function to create the user in user collection.
- */
-exports.create = function (req, res, next) {
-    var body = new User(req.body);
-    if (!body.username) {
-        res.status(400).send('User name is missing');
-        return;
-    }
-    userService.createUser(body, function (error, response) {
-        if (response) {
-            res.status(201).send(response);
-        } else if (error) {
-            res.status(400).send(error);
+
+exports.create =  function (req, res, next) {
+
+    //check email exits
+    User.findOne({email: req.body.email}).exec(async (err,user)=>{
+        if(err) return res.status(401).json(err);
+        if(user) return res.status(404).json({statusCode: res.statusCode, err: 'Email đã tồn tại!'});
+        if(!user){
+            const user = new User(req.body);
+            user.userId = uuid.v1();
+            user.email = req.body.email;
+            user.name = req.body.name;
+            user.phone = req.body.phone;
+            user.address = req.body.address;
+            const nDate = new Date().toLocaleString('en-US', {
+                timeZone: 'Asia/Ho_Chi_Minh'
+            });
+            user.created_at = nDate;
+            user.update_at = nDate;
+            user.avatar = "";
+            user.role = 'user';
+            await bcrypt.hash(req.body.password, 10,   (err, hash) => {
+                if (err) {
+                    res.status(401).send({statusCode: res.statusCode, err: 'Mã hoá mật khẩu thất bại!'})
+                }else {
+                    user.password = hash;
+                    userService.createUser(user, function (error, response) {
+                        if (response) {
+                            res.status(201).send(response);
+                        } else if (error) {
+                            res.status(400).send(error);
+                        }
+                    });
+                }
+            });
+
+
         }
     });
-}
 
-/**
- * Function to find user from user collection.
- */
-exports.find = function (req, res) {
-    var params = req.params || {};
-    var query = {
-        username: params.username
-    };
-    if (!query) {
-        res.status(400).send('Bad Request');
-        return;
-    }
-    userService.findUser(query, function (error, response) {
-        if (error) {
-            res.status(404).send(error);
-            return;
-        }
-        if (response) {
-            res.status(200).send(response);
-            return;
-        }
-        if (!response) {
-            res.status(204).send('No Data Found');
-        }
-    });
-}
+};
+exports.login =  (req, res, next) => {
+    console.log("user login " + req.body.email);
+    User.findOne({email: req.body.email}).exec(function (err, user) {
+        if (err) return res.json(err);
 
-/**
- * Function to update the user data  by their ID.
- */
-exports.updateById = function (req, res) {
-    var body = req.body;
+        if (!user) return res.status(404).json({statusCode: res.statusCode, err: 'Tài khoản không tồn tại!'});
 
-    if (!body.id) {
-        res.status(400).send('Id is missing');
-        return;
-    }
-    var updateData = body.data || {}
-    userService.updateUserById(body.id, updateData, (err, response) => {
-        if (response) {
-            res.status(200).send(response);
-        } else if (err) {
-            res.status(400).send(err);
-        }
-    });
-}
+        bcrypt.compare(req.body.password, user.password, (err, result) => {
+            if (err) return res.json(err);
+            if (result) {
+                jwt.generateToken(user).then((token) =>  {
+                    user.token = token;
+                    res.status(200).json({statusCode: res.statusCode,  data: user});
+                }).catch((err)  => {
+                    console.log("tokennn" + err);
+                    res.status(401).json({statusCode: res.statusCode, err: 'Cấp token thất bại! ' + err})
 
-/**
- * Function to uodate the user data by filter condition.
- */
-exports.update = function (req, res) {
-    var body = req.body;
-    var query = body.query;
-    var data = body.data;
-    var options = body.options
-    if (!query) {
-        res.status(400).send('Bad request');
-        return;
-    }
+                })
+            } else {
+                res.status(404).send({statusCode: res.statusCode, err: 'Tài khoản hoặc mật khẩu không đúng! ' + err})
 
-    userService.updateUser(query, data, options, (err, response) => {
-        if (response) {
-            res.status(200).send(response);
-        } else if (err) {
-            res.status(400).send(err);
-        }
-    });
-}
-
-/**
- * Function to delete the user from collection.
- */
-exports.delete = function (req, res) {
-    var body = req.body || {};
-    var query = body.query;
-    if (!query) {
-        res.status(400).send('Bad Request');
-        return;
-    }
-    userService.deleteUser(query, function (error, response) {
-        if (error) {
-            res.status(400).send(error);
-            return;
-        }
-        if (response) {
-            if (response.n === 1 && response.ok === 1) {
-                res.status(202).send(body);
             }
-            if (response.n === 0 && response.ok === 1) {
-                res.status(204).send({
-                    message: 'No data found'
-                });
-            }
-        }
+        });
     });
-}
-//TODO: 
-// Model.find()
-// Model.findById()
 
-class User {
-    constructor(userData) {
-        this.username = userData.username || '';
-        this.firstName = userData.firstName || '';
-        this.lastName = userData.lastName || '';
-        this.dob = userData.dob || '';
-        this.address = userData.address || '';
-        this.phone = userData.phone || '';
-        this.role = userData.role || '';
-    }
-}
+};
+exports.profile = (req,res,next)=>{
+    userService.findUser(req.userId,(err,response)=>{
+        if(err) return res.status(401).json(err);
+        return res.status(200).json({statusCode: res.statusCode, data: response});
+    })
+};

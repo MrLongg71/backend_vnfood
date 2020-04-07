@@ -2,22 +2,20 @@ const mongoose = require('mongoose');
 var UserSchema = new mongoose.Schema({
     userId: {
         type: String,
-        unique: true,
         required: true,
-        trim: true
-
+        index: true,
+        unique:true,
     },
     email: {
+        unique:true,
+
         type: String,
-        unique: true,
         required: true,
-        trim: true
     },
-    name: {
+    username: {
         type: String,
-        unique: true,
         required: true,
-        trim: true
+
     },
     password: {
         type: String,
@@ -25,16 +23,18 @@ var UserSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        unique: true,
         required: true,
-        trim: true
     },
     address: {
         type: String,
-        unique: true,
-        trim: true
+    },
+    avatar:{
+        type: String,
     },
     role: {
+        type: String,
+    },
+    token:{
         type: String,
     },
     created_at:{

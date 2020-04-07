@@ -1,48 +1,56 @@
+
 var createError = require('http-errors');
 var express = require('express');
+const exphbs = require('express-handlebars');
 var path = require('path');
 const http = require('http');
+const AuthMiddleWare = require('./src/middleware/auth_middleware');
+const routerMain = express.Router();
 
-
-//Models
-require('./src/model/UserModel');
 
 //Routes
-var usersRouter = require('./src/routers/router');
+var usersRouter = require('./src/routers/routerUser');
+var catesRouter = require('./src/routers/routerCate');
+var productsRouter = require('./src/routers/routerProduct');
+var webRouter = require('./src/routers/routerWeb');
+var uploadRouter = require('./src/routers/routerUpload');
+var ordersRouter = require('./src/routers/routerOrder');
 
 //Configs
-require('./src/connection/connection')
-
+require('./src/connection/connection');
 var app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use("/public/photo", express.static(path.join('/Users/pro/ProjectAndroid/android_server/webadmin/public/uploads')));
 
-app.use(express.static(path.join(__dirname, 'public')));
 
+var hbs = exphbs.create({defaultLayout: "" ,extname: '.handlebars'});
+app.engine('handlebars',hbs.engine);
+app.set('view engine', 'handlebars');
+app.get('/', function (req, res) {
+ res.render('signin',{layout:false});
+});
 
+app.get('/index',(req,res) =>{
+ let reqPath = path.join(__dirname, '/UI/index.html');
+
+ res.sendFile( reqPath);
+});
+
+// app.use('/',webRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/cates', catesRouter);
+app.use('/api/products', productsRouter);
+app.use('/api/orders',ordersRouter);
+//upload
+app.use('/api/upload', uploadRouter);
+//upload
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+ next(createError(404));
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
 
 /**
  * Get port from environment and store in Express.
@@ -57,6 +65,6 @@ const server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-server.listen(port, () => console.log(`API running on localhost:${port}`));
+server.listen(1237, () => console.log(`API running on localhost:${port}`));
 
 module.exports = app;
