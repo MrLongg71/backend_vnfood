@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require('../model/UserModel');
 var ReviewSchema = new mongoose.Schema({
     reviewId: {
         type: String,
@@ -21,7 +22,7 @@ var ReviewSchema = new mongoose.Schema({
     },
     userId:{
         required: true,
-        type: String,
+        type: String, ref: "User"
     },
     created_at: {
         type: Date

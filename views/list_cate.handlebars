@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>VNShop Manager</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+</head>
+<body>
+<div class="container-fluid" style="height: 100%">
+
+
+    <div class="row">
+        <div class="col-lg-3 h-100 " style="background: #0573ff; height: 500px; position: fixed; top: 0px;
+    left: 0px;
+    z-index: 100;">
+            <h3 class="text-lg-center mt-2" style="color: white;">Bảng điều khiển</h3>
+            <div class="dropdown dropdown dropright">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-bars"></i>
+                    Sản phẩm
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="add_product.html">Danh sách sản phẩm</a>
+                </div>
+            </div>
+            </br>
+            <div class="dropdown dropdown dropright">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-bars"></i>
+                    Loại Sản phẩm
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="add_product.html">Danh sách Loại sản phẩm</a>
+                </div>
+            </div>
+            </br>
+            <div class="dropdown dropdown dropright">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-bars"></i>
+                    Người dùng
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="add_product.html">Danh sách người dùng</a>
+                </div>
+            </div>
+            </br>
+            <div class="dropdown dropdown dropright">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-bars"></i>
+                    Thống kê
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Ngày</a>
+                    <a class="dropdown-item" href="#">Tuần</a>
+
+                    <a class="dropdown-item" href="#">Tháng</a>
+                    <a class="dropdown-item" href="#">Loại Sản phẩm bán nhiều</a>
+                </div>
+            </div>
+            </br>
+
+            <div class="dropdown dropdown dropright mt-10">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-bars"></i>
+                    Cài đặt
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Đổi mật khẩu</a>
+                    <a class="dropdown-item" href="edit_profile.html">Cập nhật thông tin</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9" style="position: absolute;
+    right: 0;">
+
+
+            <div class="d-flex">
+
+                <form class="form-inline my-2 my-lg-0 p-2 mr-auto">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <div class="p-2 ">
+                    <img class="rounded-circle" src="../images/avatar.png" alt="" height="42" width="42">
+                </div>
+                <div class="p-2">
+                    <p class="text-lg-center mt-2">Admin</p>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class=" col-lg-3 card-body fa-border bg-success text-white rounded text-lg-center mr-4 ml-5"
+                     style="width:400px">
+                    <div class="card-body">
+                        <h4 class="card-title">Tuần</h4>
+                        <p class="card-text">200.000đ</p>
+
+                    </div>
+                </div>
+                <div class=" col-lg-3 card-body fa-border bg-warning text-white rounded text-lg-center mr-3"
+                     style="width:400px">
+                    <div class="card-body">
+                        <h4 class="card-title">Tháng</h4>
+                        <p class="card-text">600.000đ</p>
+
+                    </div>
+                </div>
+                <div class=" col-lg-3 card-body fa-border bg-success text-white rounded text-lg-center"
+                     style="width:400px">
+                    <div class="card-body">
+                        <h4 class="card-title">Năm</h4>
+                        <p class="card-text">1000.000đ</p>
+
+                    </div>
+                </div>
+            </div>
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                <tr>
+                    <th>Images</th>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                    {{# each cateList}}
+                    <td>
+                        <image src="http://localhost:4000/public/photo/{{images}}" style="width: 50px; height: 50px"> </image>
+                    </td>
+                    <td>{{name}}</td>
+
+                    <td>
+                        <a href="/edit_cate/{{_id}}">Edit</a>
+
+                        <a href="/delete_cate/{{_id}}">Delete</a>
+
+                    </td>
+                    </tr>
+                      {{/each}}
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // $(document).ready(function () {
+    //     $('#table').DataTable();
+    // });
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+</script>
+
+</body>
+</html>

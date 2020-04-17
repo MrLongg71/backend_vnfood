@@ -9,6 +9,10 @@ var ImagesSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    productId: {
+        type: String,
+        required: true,
+    },
 });
 var ImagesModel = mongoose.model('Images', ImagesSchema);
 module.exports = ImagesModel;

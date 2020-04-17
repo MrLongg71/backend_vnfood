@@ -53,3 +53,13 @@ exports.list = function (req, res) {
     })
 
 };
+exports.listBanner = function (req, res) {
+    cateService.selectAllBanner(function (err, data) {
+        if (data) {
+            res.status(200).json({statusCode: res.statusCode, data: data});
+        } else if (err) {
+            res.status(400).send({statusCode: res.statusCode, data: err});
+        }
+    })
+
+};

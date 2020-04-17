@@ -8,13 +8,12 @@ var ProductSchema = new mongoose.Schema({
     },
     name: {
         unique: true,
-        type: String,
+        type: {},
         required: true,
     },
     description: {
         type: String,
         required: true,
-
     },
     image: {
         type: String,
@@ -39,9 +38,9 @@ var ProductSchema = new mongoose.Schema({
     update_at: {
         type: Date
     },
-    // delete_at:{
-    //     type: Date
-    // },
+    delete_at:{
+        type: Date
+    },
 
 
 });

@@ -10,11 +10,11 @@ routerUser.get('/', function (req, res, next) {
 /**
  * To create the New user
  */
-//t muốn handler login ở đây hoặc ở đâu đó, đc là đc =)) login dau run thử xem
 routerUser.post('/register', user.create);
 routerUser.post('/login',user.login);
 routerUser.use(auth.isAuth);
 routerUser.get('/profile',user.profile);
+routerUser.post('/change-password',user.changePassword);
 
 
 

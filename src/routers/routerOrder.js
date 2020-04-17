@@ -11,6 +11,8 @@ routerOrders.get('/', function (req, res, next) {
 routerOrders.use(AuthMiddleWare.isAuth);
 
 routerOrders.post('/add',orders.addOrder);
+routerOrders.post('/gift',orders.addGift);
+routerOrders.get('/check_gift/:id',orders.checkGift);
 
 
 module.exports = routerOrders;

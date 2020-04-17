@@ -1,6 +1,7 @@
 (function () {
     const mongoose = require('mongoose');
     const cate = mongoose.model('Cates');
+    const banner = require('../model/BannerModel')
 
     exports.createCate = function (cate, callback) {
         cate.save(cate).then((response) => {
@@ -10,10 +11,10 @@
         });
     };
 
-     exports.updateCate = async function  (cateId, cate, callback)  {
-         await  cate.findOneAndUpdate({
+    exports.updateCate = async function (cateId, cate, callback) {
+        await cate.findOneAndUpdate({
             cateId: cateId
-        }, {cate:cate}, (err, response) => {
+        }, {cate: cate}, (err, response) => {
             console.log(err);
             callback(err, response);
         });
@@ -24,18 +25,22 @@
             timeZone: 'Asia/Ho_Chi_Minh'
         });
 
-        await cate.findOneAndUpdate({cateId: query},{delete_at : nDate},(err,response)=>{
-
+        await cate.findOneAndUpdate({cateId: query}, {delete_at: nDate}, (err, response) => {
             callback(err, response);
-
         });
     };
     exports.selectAll = async function (callback) {
-        await  cate.find({
-            delete_at : null
-        },(err,data)=>{
+        await cate.find({
+            delete_at: null
+        }, (err, data) => {
             callback(err, data);
-});
+        });
+    }
+
+    exports.selectAllBanner = async function (callback) {
+        await banner.find({}, (err, data) => {
+            callback(err, data);
+        });
     }
 
 })();

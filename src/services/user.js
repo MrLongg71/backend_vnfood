@@ -19,11 +19,25 @@
 
     exports.updateUserById = function (id, data, callback) {
         user.findByIdAndUpdate({
-            _id: id
+            userId: id
         }, data, (err, response) => {
             callback(err, response);
         });
     };
+    exports.updatePassword =  (id,newPassword,callback)=>{
+        user.updateOne(
+            {userId: id},
+            {$set: {password : newPassword}},
+            (err, res) => {
+                if (!err) {
+                   callback(err,null)
+                } else {
+                    callback(null,res)
+
+                }
+            }
+        );
+    }
 
     exports.updateUser = function (query, data, options, callback) {
         user.findOneAndUpdate(query, data, options, (err, response) => {

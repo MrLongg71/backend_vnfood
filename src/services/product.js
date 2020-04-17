@@ -3,6 +3,7 @@
     const product = mongoose.model('Products');
     const cate = mongoose.model('Cates');
     const review = mongoose.model('Reviews');
+    const images = require('../model/ImagesModel')
 
     exports.createProduct = function (product, callback) {
         cate.findOne({cateId : product.cateId},(err,cateId) =>{
@@ -40,8 +41,8 @@
         });
     };
     exports.selectAll = async function (callback) {
-        // const dataProduct = product.find({delete_at : null
-        // },(err,data) =>{
+        const dataProduct = product.find({delete_at : null
+        },(err,data) =>{
            product.aggregate([
                {$lookup:{
                    from: 'cates',
@@ -53,33 +54,50 @@
                if(err) throw err;
                    callback(err, res);
            });
-    }
+    })}
+    exports.selectAllForCate = async function (query,callback) {
+        product.find({delete_at : null, cateId : query
+        },(err,data) =>{
+            console.log(data)
+            if (err) callback(err,null)
+            if(data){
+                callback(err,data)
+            }
+        })}
+    exports.selectImageForProduct = async function (query,callback) {
+        images.find({ productId : query},(err,data) =>{
+            if (err) callback(err,null);
+            if(data){
+                callback(err,data)
+            }
+        })}
     exports.selectAllReview = async function (query,callback) {
-        // review.find({productId : query},(err,data)=>{
-        //     console.log(err);
-        //     if (err) throw err;
-        //     callback(err,data)
-        // });
 
+        //review -> product
+        //
 
-       //
-        review.aggregate([
-            {$lookup: {
-                    from: 'users',
-                    localField: 'userId',
-                    foreignField: 'userId',
-                    as: 'user'
-                }}
-        ],function (err,res) {
-            if (err) throw err;
-           var arr =  Object.entries(res);
-
-
-            arr.find({productId : query},(err,data)=>{
-                callback(err,data);
-
-            })
+        let reviewData = await review.find({ productId: query }).populate({
+            path: "userId",
+            select: "username avatar",
         });
+
+        console.log(reviewData);
+        // review.aggregate([
+        //     {$lookup: {
+        //             from: 'users',
+        //             localField: 'userId',
+        //             foreignField: 'userId',
+        //             as: 'user'
+        //         }}
+        // ],function (err,res) {
+        //     if (err) throw err;
+        //    var arr =  Object.entries(res);
+        //
+        //     arr.find({productId : query},(err,data)=>{
+        //         callback(err,data);
+        //
+        //     })
+        // });
            // review.aggregate([
            //      {$lookup:{
            //              from: 'users',

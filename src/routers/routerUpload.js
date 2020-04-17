@@ -1,5 +1,7 @@
 var express = require('express');
 var routerUser = express.Router();
+var path = require('path');
+
 var auth = require('../middleware/auth_middleware');
 var upload = require('../controllers/UploadController');
 const multer = require("multer");
@@ -41,5 +43,6 @@ routerUser.get('/', async  function (req, res, next) {
 });
 routerUser.post('/photo',uploadDefault.single("file"), upload.uploadPhoto);
 routerUser.post('/photos', uploadDefault.array("files", 10), upload.uploadPhotos);
+routerUser.post('/photos-banner', uploadDefault.array("files", 10), upload.uploadPhotosBanner);
 
 module.exports = routerUser;
