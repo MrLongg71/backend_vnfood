@@ -1,31 +1,27 @@
 
-const jwtHelper = require("../helpers/jwt.helper");
+const jwtHelper = require("../helpers/jwt");
 const debug = console.log.bind(console);
 
-const accessTokenSecret = "access-token-secret-example-trungquandev.com-green-cat-a@";
+const SECRET_KEY  = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/3j+skZ6UtW+5u09lHNsj6tQ51s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQAB"
+
 
 let isAuth = async (req, res, next) => {
-  const tokenFromClient =  req.query.token || req.headers["token"];
+  let tokenFromClient =  req.query.token || req.headers["authorization"]
 
+  if(tokenFromClient != null && tokenFromClient.startsWith('Bearer ')){
+    tokenFromClient = tokenFromClient.slice(7,tokenFromClient.length);
+  }
   if (tokenFromClient) {
     try {
-      const decoded = await jwtHelper.verifyToken(tokenFromClient, accessTokenSecret);
-
-      // Nếu token hợp lệ, lưu thông tin giải mã được vào đối tượng req, dùng cho các xử lý ở phía sau.
-      req.jwtDecoded = decoded;
-
-      // Cho phép req đi tiếp sang controller.
+      const decoded = await jwtHelper.verifyToken(tokenFromClient, SECRET_KEY);
+      req.userId = decoded.data.userId;
       next();
     } catch (error) {
-      // Nếu giải mã gặp lỗi: Không đúng, hết hạn...etc:
-      // Lưu ý trong dự án thực tế hãy bỏ dòng debug bên dưới, mình để đây để debug lỗi cho các bạn xem thôi
-      debug("Error while verify token:", error);
       return res.status(401).json({
         message: 'Unauthorized.',
       });
     }
   } else {
-    // Không tìm thấy token trong request
     return res.status(403).send({
       message: 'No token provided.',
     });

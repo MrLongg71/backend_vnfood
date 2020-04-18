@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>VNShop Manager</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="container-fluid" style="height: 100%">
+
+
+    <div class="row">
+        <div class="col-lg-3 h-100 " style="background: #0573ff; height: 500px; position: fixed; top: 0px;
+    left: 0px;
+    z-index: 100;">
+            <h3 class="text-lg-center mt-2" style="color: white;">Bảng điều khiển</h3>
+            <div class="dropdown dropdown dropright">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-bars"></i>
+                    Sản phẩm
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/index">Danh sách sản phẩm</a>
+                    <a class="dropdown-item" href="/add_product">Thêm sản phẩm</a>
+
+                </div>
+
+            </div>
+            </br>
+            <div class="dropdown dropdown dropright">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-bars"></i>
+                    Loại Sản phẩm
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/list_cate">Danh sách Loại sản phẩm</a>
+                    <a class="dropdown-item" href="/add_cate">Thêm Loại sản phẩm</a>
+
+                </div>
+            </div>
+            </br>
+            <div class="dropdown dropdown dropright">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-bars"></i>
+                    Người dùng
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/list_user">Danh sách người dùng</a>
+                </div>
+            </div>
+            </br>
+            <div class="dropdown dropdown dropright">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-bars"></i>
+                    Khuyến mãi
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/list_gift">Danh sách khuyến mãi</a>
+                </div>
+            </div>
+            </br>
+            <div class="dropdown dropdown dropright">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-bars"></i>
+                    Banner
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/add_banner">Thêm Banner</a>
+                </div>
+            </div>
+            </br>
+
+            <div class="dropdown dropdown dropright mt-10">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-bars"></i>
+                    Đặt hàng
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/list_order">Danh sách Đặt hàng</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9" style="position: absolute;
+    right: 0;">
+
+
+            <div class="d-flex">
+
+                <form class="form-inline my-2 my-lg-0 p-2 mr-auto">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <div class="p-2 ">
+                    <img class="rounded-circle" src="../images/avatar.png" alt="" height="42" width="42">
+                </div>
+                <div class="p-2">
+                    <p class="text-lg-center mt-2">Admin</p>
+                </div>
+            </div>
+            <div class="row m-2 border border-primary">
+                <div class="col-lg-8">
+                    <form method="post" class="was-validated m-2" action="/update_cate"  enctype="multipart/form-data"
+                    >
+                        <h4>Cập nhật loại</h4>
+                        <div class="form-group">
+                            <input type="hidden" name="id" class="form-control" placeholder="Nhập Mã sản phẩm"  value="{{cate._id}}" required="">
+
+                        </div>
+                        <div class="form-group">
+                            <label>Tên sản phẩm:</label>
+                            <input type="phone" class="form-control" name="name" placeholder="Nhập Tên sản phẩm" value="{{cate.name}}"  required>
+                            <div class="valid-feedback">Ok.</div>
+                            <div class="invalid-feedback">Nhập lại</div>
+                        </div>
+
+
+                        <input type="hidden" name="image" class="form-control" placeholder="Nhập Mã sản phẩm"  value="{{cate.images}}" required="">
+
+                        <div class="rounded-  border border-primary m-2" style="height:100px">
+                            <image src="http://localhost:4000/public/photo/{{cate.images}}"  style="width: 50px; height: 50px"> </image>
+
+                            <div class="form-group">
+                                <input
+                                        multiple
+                                        type="file"
+                                        class="form-control-file"
+                                        name="file"
+                                        value="{{cate.images}}"
+                                        id="file"
+                                        placeholder="File"
+                                />
+                            </div>
+                        </div>
+
+                        <button  type="submit" class="btn btn-primary">Cập nhật</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</body>
+
+</html>
