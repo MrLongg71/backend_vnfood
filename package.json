@@ -1,6 +1,9 @@
 {
   "name": "webadmin",
   "version": "1.0.0",
+  "scripts": {
+    "start": "node main.js"
+  },
   "dependencies": {
     "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",

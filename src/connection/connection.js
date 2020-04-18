@@ -6,7 +6,7 @@ var URL = 'mongodb+srv://vnfood:vnfood@cluster0-amioj.mongodb.net/vnfood?retryWr
 mongoose.set('useFindAndModify', false);
 
 //Connection establishment
-mongoose.connect(URL, {
+mongoose.connect(process.env.MONGODB_URI || URL, {
     useNewUrlParser: true,
     useCreateIndex: true
 });
