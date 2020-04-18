@@ -1,28 +1,21 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 var OrderDetailsSchema = new mongoose.Schema({
     idOrderDetails: {
         type: String,
-        required: true,
-        index: true,
-        unique: true,
-    },
-    idOrder: {
-        unique: true,
-        type: String,
-        required: true,
     },
     productId: {
         type: String,
-        required: true,
-
     },
     amount: {
         type: String,
-        required: true,
     },
     price: {
         type: String,
-        required: true,
+    },
+    idOrder: {
+        type: String,
+
     },
     created_at: {
         type: Date
@@ -38,3 +31,4 @@ var OrderDetailsSchema = new mongoose.Schema({
 });
 var OrderDetailstModel = mongoose.model('OrderDetails', OrderDetailsSchema);
 module.exports = OrderDetailstModel;
+

@@ -16,8 +16,11 @@ var OrdersSchema = new mongoose.Schema({
         required: true,
 
     },
-    status:{
+    status: {
         type: String,
+    },
+    userId: {
+        type: String
     },
     created_at: {
         type: Date

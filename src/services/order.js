@@ -5,7 +5,7 @@
 
 
     exports.createOrderDetails = function (order, callback) {
-        orders.create(order).then((response) => {
+        orders.insertMany(order).then((response) => {
             callback(null, response);
         }, (error) => {
             callback(error, null);

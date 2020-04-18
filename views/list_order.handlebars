@@ -10,7 +10,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 
 </head>
 <body>
@@ -105,29 +106,55 @@
                     <p class="text-lg-center mt-2">Admin</p>
                 </div>
             </div>
-            <a href="/add_gift" class="btn btn-primary">+</a>
-
-
-            <!-- Modal -->
-
-          <!-- -->
-
-           <table id="example" class="table table-striped table-bordered" style="width:100%">
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                 <tr>
-                    <th>Code Gift</th>
-                    <th>Voucher</th>
+                    <th>Id Orders</th>
+                    <th>Total Amount</th>
+                    <th>Price</th>
+                    <th>status</th>
+                    <th>User</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                    {{# each giftList}}
+                    {{# each orderList}}
 
-                    <td>{{codeGift}}</td>
-                    <td>{{number}} %</td>
+
+                    <td>{{idOrder}}</td>
+                    <td>{{totalAmount}}</td>
+                    <td>{{totalPrice}}</td>
+                    <script>
+                        var color = "";
+                        "{{status}}" === "Accept" ? color = "green" : color = "black";
+                       var str =  `<td style="color: ${color}">{{status}}</td>`;
+                    </script>
+                    <script>
+                        document.write(str);
+                    </script>
+                        {{# each user}}
+                        <td>{{username}}</td>
+                          {{/each}}
+
                     <td>
-                        <a href="/delete_gift/{{_id}}">Delete</a>
+                        <a class="btn btn-outline-primary mr-2" href="/get_order-details/{{idOrder}}">Details</a>
 
+
+                        <script>
+                            var type = "";
+                            "{{status}}" === "Accept" ? type = "hidden" : type = "";
+                            var str1 =  `<a ${type} class="btn btn-outline-danger" href="#">Cancel</a>`
+                            var str2 = `<form ${type} action="/accept_order-details" method="post">
+                            <input type="hidden" name="idOrder" value="{{idOrder}}">
+                            <button type="submit"  class="btn btn-outline-success">Accept</button>
+                        </form>`
+                        </script>
+                        <script>
+                            document.write(str1);
+                            document.write(str2);
+
+                        </script>
+<!--                        <a ="hidden" class="btn btn-outline-danger" href="#">Cancel</a>-->
                     </td>
                     </tr>
                       {{/each}}
@@ -144,9 +171,9 @@
     // $(document).ready(function () {
     //     $('#table').DataTable();
     // });
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#example').DataTable();
-    } );
+    });
 </script>
 
 </body>

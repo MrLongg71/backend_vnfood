@@ -7,7 +7,7 @@ const uuid = require('uuid');
 const jwt = require('../helpers/jwt');
 
 
-exports.addOrder = function (req, res, next) {
+exports.addOrder = function (req, response, next) {
     const nDate = new Date().toLocaleString('en-US', {
         timeZone: 'Asia/Ho_Chi_Minh'
     });
@@ -15,36 +15,28 @@ exports.addOrder = function (req, res, next) {
     var orderReq = JSON.parse(req.body.order);
     var orderDetailsReq = JSON.parse(req.body.order_details);
 
-    console.log(orderReq);
-    console.log(orderDetailsReq);
-    const idOrder = uuid.v1();
     var order = Orders();
-    order.idOrder = idOrder;
+    order.idOrder = orderReq.orderId;
     order.totalAmount = orderReq.totalAmount;
     order.totalPrice = orderReq.totalPrice;
     order.status = "Waiting";
+    order.userId = req.userId;
     order.created_at = nDate;
     order.update_at = nDate;
     Orders.create(order, (err, res) => {
-        for (var details of orderDetailsReq) {
-            var orderDetails = OrdersDetails();
-            orderDetails.idOrderDetails = uuid.v1();
-            orderDetails.idOrder = idOrder;
-            orderDetails.productId = details.productIdl;
-            orderDetails.amount = details.amount;
-            orderDetails.price = details.amount;
-            orderDetails.price = details.price;
-            orderDetails.created_at = nDate;
-            orderDetails.update_at = nDate;
-            orderService.createOrderDetails(orderDetails, (err, res) => {
-
+        if(err){
+            response.status(401).json({statusCode: 401, data: "Có lỗi xảy ra !!!"})
+        }else{
+            orderService.createOrderDetails(orderDetailsReq, (err, res1) => {
+                if(err){
+                    response.status(401).json({statusCode: 401, data: "Có lỗi xảy ra !!!"})
+                }else{
+                    response.status(200).json({statusCode: 200, data: "Đặt hàng thành công !!!"})
+                }
             })
         }
 
     });
-    res.status(200).json({statusCode: 200, data: "Đặt hàng thành công !!!"})
-
-
 
 
 };

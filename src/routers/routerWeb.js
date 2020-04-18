@@ -1,6 +1,7 @@
 const express = require('express');
 const routerWeb = express();
 const Products = require('../model/ProductModel')
+const Orders = require('../model/OrderModel')
 const multer = require("multer");
 
 const abc = require('../controllers/abc')
@@ -59,11 +60,20 @@ routerWeb.get('/index', abc.getAllProduct);
 routerWeb.get('/delete_product/:id', abc.deleteProduct);
 routerWeb.get('/delete_cate/:id', abc.deleteCate);
 routerWeb.get('/delete_gift/:id', abc.deleteGift);
+routerWeb.post('/accept_order-details', (req,res1)=>{
+    console.log("dfadf");
+        console.log(req.body.idOrder);
+        Orders.findOneAndUpdate({idOrder : req.body.idOrder},{status : "Accept"},(err,res)=>{
+            res1.redirect('list_order');
+        })
+});
 routerWeb.get('/list_cate', abc.getAllCate);
 routerWeb.get('/list_user', abc.getAllUser);
+routerWeb.get('/list_order', abc.getAllOrders);
+routerWeb.get('/get_order-details/:id', abc.getOrderDetails);
 routerWeb.get('/list_gift', abc.getAllGift);
 routerWeb.get('/add_product', abc.addProduct);
-routerWeb.get('/add_banner', (err,res) =>{
+routerWeb.get('/add_banner', (err, res) => {
     res.render("add_banner")
 });
 routerWeb.get('/add_gift', (req, res) => {
@@ -90,7 +100,7 @@ routerWeb.post('/create_gift', (req, res1) => {
     gifts.update_at = nDate;
     gift.create(gifts, (err, data) => {
         if (err) console.log(err);
-        res1.render('index');
+        res1.redirect('/list_gift');
 
     });
 });
@@ -103,12 +113,12 @@ routerWeb.post('/create_product', uploadDefault.array('files'), (req, res1) => {
     });
     var image;
     req.files.forEach(async (item, index, array) => {
-         image = array[0].filename;
+        image = array[0].filename;
         var imageProduct = images();
         imageProduct.imageId = uuid.v1();
         imageProduct.url = item.filename;
         imageProduct.productId = productId;
-        await  images.create(imageProduct, (err, res) => {
+        await images.create(imageProduct, (err, res) => {
             if (err) res.status(404).json({statusCode: 404, err: 'Có lỗi xảy ra!'})
         })
     });

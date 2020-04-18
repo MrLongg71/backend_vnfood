@@ -10,7 +10,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 
 </head>
 <body>
@@ -105,30 +106,30 @@
                     <p class="text-lg-center mt-2">Admin</p>
                 </div>
             </div>
-            <a href="/add_gift" class="btn btn-primary">+</a>
-
-
-            <!-- Modal -->
-
-          <!-- -->
-
-           <table id="example" class="table table-striped table-bordered" style="width:100%">
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                 <tr>
-                    <th>Code Gift</th>
-                    <th>Voucher</th>
-                    <th></th>
+                    <th>Images</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Total Amount</th>
+                    <th>Total Price</th>
                 </tr>
                 </thead>
                 <tbody>
-                    {{# each giftList}}
+                    {{# each orderDetailsList}}
 
-                    <td>{{codeGift}}</td>
-                    <td>{{number}} %</td>
-                    <td>
-                        <a href="/delete_gift/{{_id}}">Delete</a>
+                  {{# each product}}
+                       <td> <image src="http://localhost:4000/public/photo/{{image}}"
+                                   style="width: 50px; height: 50px"></image></td>
+                        <td>{{name}}</td>
+                       <td>{{price}}</td>
+                          {{/each}}
 
-                    </td>
+
+                    <td>{{amount}}</td>
+                    <td>{{price}}</td>
+
                     </tr>
                       {{/each}}
                 </tbody>
@@ -144,9 +145,9 @@
     // $(document).ready(function () {
     //     $('#table').DataTable();
     // });
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#example').DataTable();
-    } );
+    });
 </script>
 
 </body>

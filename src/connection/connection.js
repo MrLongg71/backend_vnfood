@@ -10,7 +10,7 @@ mongoose.connect(URL, {
     useNewUrlParser: true,
     useCreateIndex: true
 });
-//Models
+//Modelsfalse
 var db = mongoose.connection;
 
 db.on('error', () => {

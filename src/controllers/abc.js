@@ -2,6 +2,8 @@ const product = require('../model/ProductModel');
 const cate = require('../model/CateModel');
 const User = require('../model/UserModel');
 const gift = require('../model/GiftModel');
+const Orders = require('../model/OrderModel');
+const OrdersDetails = require('../model/OrderDetailsModel');
 var express = require('express');
 var router = express.Router();
 const session = require('express-session');
@@ -144,10 +146,11 @@ exports.getAllGift = function (req, res) {
     gift.find().lean().exec((err, data) => {
         if (err) throw err;
         res.render('list_gift', {giftList: data.reverse()});
+
     })
 
 };
-exports.addGift = (req,res) =>{
+exports.addGift = (req, res) => {
 
 }
 exports.deleteGift = function (request, response) {
@@ -164,7 +167,7 @@ exports.addProduct = function (req, res) {
     cate.find().lean().exec((err, data) => {
         if (err) throw err;
 
-        res.render('add_product',{cateList : data.reverse()});
+        res.render('add_product', {cateList: data.reverse()});
     })
 
 };
@@ -192,10 +195,48 @@ exports.getCate = function (request, response) {
         .exec((err, data) => {
             if (!err) {
                 if (err) throw err;
-                console.log(data);
                 response.render('edit_cate', {cate: data});
             }
         });
 };
+exports.getAllOrders = (req, res1) => {
+    Orders.aggregate([
+        {
+            $lookup: {
+                from: 'users',
+                localField: 'userId',
+                foreignField: 'userId',
+                as: 'user'
+            }
+        }
+    ], (err, res) => {
+        if (err) throw err;
+        res1.render('list_order', {orderList: res.reverse()});
+    });
+
+
+};
+exports.getOrderDetails = async (req, res1) => {
+    OrdersDetails.find({idOrder: req.params.id}, (err, data) => {
+        OrdersDetails.aggregate([
+            {"$match": {"idOrder": req.params.id}},
+            {
+                $lookup: {
+                    from: 'products',
+                    localField: 'productId',
+                    foreignField: 'productId',
+                    as: 'product'
+                }
+            },
+
+        ], (err, res) => {
+            if (err) throw err;
+            res1.render('list_order_details', {orderDetailsList: res});
+
+        });
+    })
+
+};
+
 
 

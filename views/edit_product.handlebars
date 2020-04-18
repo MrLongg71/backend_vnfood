@@ -19,47 +19,78 @@
 
 
     <div class="row">
-        <div class="col-lg-3 h-100 " style="background: #0573ff; height: 100% !important">
-            <h3 class="text-lg-center mt-2" style="color: white;">Bảng điều khiển</p>
-                <div class="dropdown dropdown dropright">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        <i class="fas fa-bars"></i>
-                        Sản phẩm
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Thêm sản phẩm</a>
-                        <a class="dropdown-item" href="#">Cập nhật sản phẩm</a>
-                        <a class="dropdown-item" href="#">Xoá sản phẩm</a>
-                    </div>
-                </div>
-                </br>
-                <div class="dropdown dropdown dropright">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        <i class="fas fa-bars"></i>
-                        Thống kê
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Ngày</a>
-                        <a class="dropdown-item" href="#">Tuần</a>
+        <div class="col-lg-3 h-100 " style="background: #0573ff; height: 500px; position: fixed; top: 0px;
+    left: 0px;
+    z-index: 100;">
+            <h3 class="text-lg-center mt-2" style="color: white;">Bảng điều khiển</h3>
+            <div class="dropdown dropdown dropright">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-bars"></i>
+                    Sản phẩm
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/index">Danh sách sản phẩm</a>
+                    <a class="dropdown-item" href="/add_product">Thêm sản phẩm</a>
 
-                        <a class="dropdown-item" href="#">Tháng</a>
-                        <a class="dropdown-item" href="#">Loại Sản phẩm bán nhiều</a>
-                    </div>
                 </div>
-                </br>
 
-                <div class="dropdown dropdown dropright mt-10">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        <i class="fas fa-bars"></i>
-                        Cài đặt
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Đổi mật khẩu</a>
-                        <a class="dropdown-item" href="#">Cập nhật thông tin</a>
-                    </div>
+            </div>
+            </br>
+            <div class="dropdown dropdown dropright">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-bars"></i>
+                    Loại Sản phẩm
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/list_cate">Danh sách Loại sản phẩm</a>
+                    <a class="dropdown-item" href="/add_cate">Thêm Loại sản phẩm</a>
+
                 </div>
+            </div>
+            </br>
+            <div class="dropdown dropdown dropright">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-bars"></i>
+                    Người dùng
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/list_user">Danh sách người dùng</a>
+                </div>
+            </div>
+            </br>
+            <div class="dropdown dropdown dropright">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-bars"></i>
+                    Khuyến mãi
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/list_gift">Danh sách khuyến mãi</a>
+                </div>
+            </div>
+            </br>
+            <div class="dropdown dropdown dropright">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-bars"></i>
+                    Banner
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/add_banner">Thêm Banner</a>
+                </div>
+            </div>
+            </br>
+
+            <div class="dropdown dropdown dropright mt-10">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-bars"></i>
+                    Đặt hàng
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/list_order">Danh sách Đặt hàng</a>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-9">
+        <div class="col-lg-9" style="position: absolute;
+    right: 0;">
 
 
             <div class="d-flex">

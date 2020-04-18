@@ -6,7 +6,7 @@ const AuthMiddleWare = require('../middleware/auth_middleware');
 
 routerProduct.get('/', product.list);
 
-// routerProduct.use(AuthMiddleWare.isAuth);
+routerProduct.use(AuthMiddleWare.isAuth);
 
 routerProduct.post('/add', product.add);
 routerProduct.get('/list', product.list);
