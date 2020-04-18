@@ -29,13 +29,6 @@ app.use("/public/photo", express.static(path.join('/Users/pro/ProjectAndroid/and
 var hbs = exphbs.create({defaultLayout: "" ,extname: '.handlebars'});
 app.engine('handlebars',hbs.engine);
 app.set('view engine', 'handlebars');
-// app.get('/', function (req, res) {
-//  res.render('signin',{layout:false});
-// });
-// app.get('/index',abc.getAllProduct);
-// app.get('/list_cate',abc.getAllCate);
-// app.get('/edit_product/:id', abc.getProduct);
-// app.post('/edit_product', abc.editProduct);
 
 
 app.use('/',webRouter);
