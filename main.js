@@ -56,7 +56,7 @@ app.use('/api/upload', uploadRouter);
 /**
  * Get port from environment and store in Express.
  */
-const port = process.env.PORT || '3000';
+const port = process.env.PORT || '4000';
 app.set('port', port);
 
 /**
@@ -66,6 +66,6 @@ const server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-server.listen(4000, () => console.log(`API running on localhost:${port}`));
+server.listen(port, () => console.log(`API running on localhost:${port}`));
 
 module.exports = app;
