@@ -50,7 +50,7 @@ exports.login = (req, res, next) => {
     User.findOne({email: req.body.email}).exec(function (err, user) {
         if (err) return res.json(err);
 
-        if (!user) return res.status(404).json({statusCode: res.statusCode, err: 'Tài khoản không tồn tại!'});
+        if (!user) return res.status(404).json({statusCode: res.statusCode, message: 'Tài khoản không tồn tại!',data : null});
 
         bcrypt.compare(req.body.password, user.password, (err, result) => {
             if (err) return res.json(err);
@@ -64,7 +64,8 @@ exports.login = (req, res, next) => {
 
                 })
             } else {
-                res.status(404).send({statusCode: res.statusCode, err: 'Tài khoản hoặc mật khẩu không đúng! ' + err})
+                console.log("sfdfd")
+                res.status(404).send({statusCode: res.statusCode, message: 'Tài khoản hoặc mật khẩu không đúng! ' + err,data : null})
 
             }
         });
