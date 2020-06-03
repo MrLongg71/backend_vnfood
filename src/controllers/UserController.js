@@ -50,7 +50,7 @@ exports.login = (req, res, next) => {
     User.findOne({email: req.body.email}).exec(function (err, user) {
         if (err) return res.json(err);
 
-        if (!user) return res.status(403).json({statusCode: res.statusCode, message: 'Tài khoản không tồn tại!',data : []});
+        if (!user) return res.status(200).json({statusCode: res.statusCode, message: 'Tài khoản không tồn tại!',data : []});
 
         bcrypt.compare(req.body.password, user.password, (err, result) => {
             if (err) return res.json(err);
