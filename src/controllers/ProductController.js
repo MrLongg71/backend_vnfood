@@ -122,7 +122,6 @@ exports.listReview = function (req, res) {
 };
 
 exports.listSearch = function (req, res) {
-    console.log(req.query.search)
     productService.selectSearch(req.query.search, function (err, data) {
         if (data) {
             res.status(200).json({statusCode: res.statusCode, data: data});
