@@ -1,5 +1,8 @@
 const banners = require('../model/BannerModel')
 const uuid = require('uuid');
+
+
+
 const uploadPhoto = (req, res) => {
     uploadPhotos(req, res);
     const file = req.file;
@@ -42,10 +45,9 @@ const uploadPhotosBanner = (req, res) => {
     }
 
     for (var file of files) {
-        console.log(file.filename)
         var banner = banners();
         banner.imageId = uuid.v1();
-        banner.url = file.filename;
+        banner.url = file.path;
         banners.create(banner, (err, res) => {
             if (err) res.status(404).json({statusCode: 404, err: 'Có lỗi xảy ra!!'})
         })
