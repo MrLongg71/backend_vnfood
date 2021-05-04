@@ -23,7 +23,8 @@ require('./src/connection/connection');
 var app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use("/public/photo", express.static(path.join('/Users/pro/ProjectAndroid/android_server/webadmin/public/uploads')));
+// app.use("/public/photo", express.static(path.join('/Users/pro/ProjectAndroid/android_server/webadmin/public/uploads')));
+app.use("/public/photo", express.static("public/uploads"));
 
 
 var hbs = exphbs.create({defaultLayout: "" ,extname: '.handlebars'});
@@ -49,7 +50,7 @@ app.use('/api/upload', uploadRouter);
 /**
  * Get port from environment and store in Express.
  */
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 4000;
 app.set('port', port);
 
 /**
