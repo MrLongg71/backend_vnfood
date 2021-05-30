@@ -52,18 +52,24 @@ exports.login = (req, res, next) => {
 
         if (!user) return res.status(404).json({statusCode: res.statusCode, err: 'Tài khoản không tồn tại!',data : []});
 
+
         bcrypt.compare(req.body.password, user.password, (err, result) => {
             if (err) return res.json(err);
             if (result) {
                 jwt.generateToken(user).then((token) => {
                     user.token = token;
-                    res.status(200).json({statusCode: res.statusCode, data: user});
+                    res.status(200).json({statusCode: res.statusCode,message : 'thanh cong ne', data: user});
                 }).catch((err) => {
                     res.status(401).json({statusCode: res.statusCode, err: 'Cấp token thất bại! ' + err})
 
                 })
             } else {
+
                 res.status(403).send({statusCode: res.statusCode, err: 'Tài khoản hoặc mật khẩu không đúng! ' + err,data : []})
+
+               
+
+
 
             }
         });

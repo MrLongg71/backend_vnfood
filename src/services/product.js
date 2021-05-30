@@ -72,26 +72,16 @@
         })
     }
     exports.selectSearch = async function (query, callback) {
-        let searchQuery = queryVar(query);
-        product.find({productId: query}, (err, res) => {
-            console.log(res)
-        })
-    };
-    let queryVar = function(str) {
-        let q = str.replace( /\r\n/g, '').replace(/^\s+|\s+$/, '').replace(/[^a-z\s]+/gi, '').replace(/\s+$/, '');
 
-        let parts = q.split(/\s/);
-        let terms = [];
-        parts.forEach(part => {
-                terms.push(part);
-        });
-        let query = {'$and': []};
-        terms.forEach(term => {
-            let queryFrag = {title: {'$regex': term, '$options': 'i'}};
-            query['$and'].push(queryFrag);
-        });
-        return query;
+        product.find({'name': {'$regex': query}}, (err, res) => {
+            if(err){
+                callback(err, null);
+            }
+            callback(null,res);
+        })
+
     };
+
     exports.selectImageForProduct = async function (query, callback) {
         images.find({productId: query}, (err, data) => {
             if (err) callback(err, null);
