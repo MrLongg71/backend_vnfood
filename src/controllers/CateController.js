@@ -37,7 +37,7 @@ exports.update = function (req, res) {
     const cate = new Cate(req.body);
     cateService.updateCate(req.body.cateId, cate, function (err, response) {
         if (response) {
-            res.status(200).send({statusCode: res.statusCode, msg: "Cập nhật thành công!"});
+            res.status(200).send({statusCode: res.statusCode, data: "Cập nhật thành công!"});
         } else if (err) {
             res.status(400).send({statusCode: res.statusCode, err: "Cập nhật thất bại! " + err});
         }
@@ -48,7 +48,7 @@ exports.list = function (req, res) {
         if (data) {
             res.status(200).json({statusCode: res.statusCode, data: data});
         } else if (err) {
-            res.status(400).send({statusCode: res.statusCode, data: err});
+            res.status(400).send({statusCode: res.statusCode, err: err});
         }
     })
 
@@ -58,7 +58,7 @@ exports.listBanner = function (req, res) {
         if (data) {
             res.status(200).json({statusCode: res.statusCode, data: data});
         } else if (err) {
-            res.status(400).send({statusCode: res.statusCode, data: err});
+            res.status(400).send({statusCode: res.statusCode, err: err});
         }
     })
 
